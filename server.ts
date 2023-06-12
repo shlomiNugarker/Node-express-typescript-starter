@@ -5,6 +5,8 @@ import path from 'path'
 import dotenv from 'dotenv'
 import cors from 'cors'
 
+import itemRoutes from './api/item/itemRoutes'
+
 dotenv.config()
 
 const app: Express = express()
@@ -30,6 +32,8 @@ if (process.env.NODE_ENV === 'production') {
   }
   app.use(cors(corsOptions))
 }
+
+app.use('/api/game', itemRoutes)
 
 app.get('/**', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'))
